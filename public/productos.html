@@ -1,342 +1,518 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos - Mi Sitio Web</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos - ACTIVIFIT</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <style>
-        :root {
-            --accent: #6c63ff;
-            --accent-dark: #4b44cc;
-            --card-bg: #fff;
-        }
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1e3a8a;
+      }
 
-        * { box-sizing: border-box; }
+      body {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: #f8fafc;
+      }
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f8f9fa;
-            overflow-x: hidden;
-        }
+      /* HERO */
+      .hero-activifit {
+        background:
+          linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)),
+          url("https://picsum.photos/id/1015/2000/1200") center/cover no-repeat;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        color: white;
+        position: relative;
+      }
 
-        /* NAV */
-        .navbar {
-            background: #111 !important;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-        }
-        .navbar-brand strong { color: #fff; letter-spacing: 1px; }
-        .nav-link { color: rgba(255,255,255,0.75) !important; transition: color .3s; }
-        .nav-link:hover, .nav-link.active { color: var(--accent) !important; }
+      .new-collection {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.95);
+        color: #0f172a;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 8px 24px;
+        border-radius: 50px;
+        letter-spacing: 1px;
+      }
 
-        /* HERO */
-        .hero-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #fff;
-            padding: 100px 0 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            width: 600px; height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
-            top: -200px; right: -100px;
-            pointer-events: none;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: rgba(108,99,255,0.2);
-            border: 1px solid rgba(108,99,255,0.5);
-            color: #a89fff;
-            font-size: 13px;
-            padding: 6px 16px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-        .hero-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 20px;
-        }
-        .hero-title span { color: var(--accent); }
-        .hero-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.65); max-width: 540px; margin-bottom: 36px; }
+      .hero-title {
+        font-size: clamp(3rem, 7vw, 4.5rem);
+        font-weight: 800;
+        line-height: 1.05;
+      }
 
-        /* SEARCH / FILTER */
-        .filter-bar {
-            background: #fff;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-            margin-bottom: 48px;
-        }
-        .filter-bar input {
-            border-radius: 50px;
-            border: 1.5px solid #e0e0e0;
-            padding: 10px 20px;
-            transition: border-color .3s;
-        }
-        .filter-bar input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(108,99,255,0.12); }
-        .filter-btn {
-            background: transparent;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 50px;
-            padding: 8px 20px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all .25s;
-            color: #555;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
-        }
+      .btn-hero {
+        border-radius: 50px;
+        padding: 14px 36px;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
 
-        /* PRODUCT CARDS */
-        .product-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid #efefef;
-            transition: transform .3s ease, box-shadow .3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(108,99,255,0.15); }
-        .product-card-img {
-            width: 100%; height: 220px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 60px;
-            position: relative;
-            overflow: hidden;
-        }
-        .product-card-badge {
-            position: absolute;
-            top: 14px; left: 14px;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: .5px;
-        }
-        .badge-nuevo { background: #e8f5e9; color: #2e7d32; }
-        .badge-popular { background: #fff3e0; color: #e65100; }
-        .badge-oferta { background: #fce4ec; color: #c62828; }
-        .product-card-body { padding: 20px; }
-        .product-card-title { font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: #1a1a2e; }
-        .product-card-desc { font-size: 13px; color: #888; margin-bottom: 16px; line-height: 1.5; }
-        .product-card-price { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
-        .product-card-price span { font-size: 13px; font-weight: 400; color: #aaa; text-decoration: line-through; margin-left: 6px; }
-        .btn-add {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            padding: 10px 24px;
-            font-size: 14px;
-            font-weight: 500;
-            width: 100%;
-            transition: background .25s, transform .15s;
-        }
-        .btn-add:hover { background: var(--accent-dark); color: #fff; transform: scale(1.02); }
+      /* FILTER BAR */
+      .filter-bar {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        padding: 20px 24px;
+        margin: -60px auto 60px;
+        max-width: 1200px;
+        position: relative;
+        z-index: 10;
+      }
 
-        /* STATS SECTION */
-        .stats-section {
-            background: linear-gradient(135deg, #6c63ff 0%, #4b44cc 100%);
-            padding: 64px 0;
-            color: #fff;
-        }
-        .stat-item { text-align: center; }
-        .stat-number { font-size: 2.8rem; font-weight: 700; }
-        .stat-label { font-size: 14px; opacity: .75; margin-top: 4px; }
+      /* PRODUCT CARD */
+      .product-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        transition: all 0.3s ease;
+        height: 100%;
+      }
 
-        /* TOAST */
-        .cart-toast {
-            position: fixed;
-            bottom: 30px; right: 30px;
-            background: #1a1a2e;
-            color: #fff;
-            padding: 14px 24px;
-            border-radius: 12px;
-            font-size: 14px;
-            z-index: 9999;
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-        }
+      .product-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 25px 50px rgba(37, 99, 235, 0.15);
+      }
 
-        /* FOOTER */
-        footer { background: #111 !important; }
+      .product-card-img {
+        height: 260px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
 
-        /* Animations initial states */
-        .hero-badge, .hero-title, .hero-subtitle, .hero-cta { opacity: 0; }
-        .product-card { opacity: 0; transform: translateY(40px); }
-        .stat-item { opacity: 0; transform: translateY(30px); }
-        .filter-bar { opacity: 0; transform: translateY(20px); }
+      .product-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: white;
+      }
+
+      .product-category {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #64748b;
+        padding: 16px 20px 0;
+      }
+
+      .product-info {
+        padding: 0 20px 20px;
+      }
+
+      .product-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin: 8px 0 6px;
+      }
+
+      .product-meta {
+        color: #64748b;
+        font-size: 0.95rem;
+      }
+
+      .price {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--primary-dark);
+      }
+
+      .price-old {
+        text-decoration: line-through;
+        color: #94a3b8;
+        font-size: 1.05rem;
+      }
+
+      .btn-agregar {
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 50px;
+      }
     </style>
-</head>
-<body>
-
-    <!-- Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html"><strong>Cambio de titulo para ejemplo (Mi sitio web david)</strong></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="productos.html">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contactos.html">Contactos</a></li>
-                </ul>
-            </div>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="../index.html">ACTIVIFIT</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="servicios.html">Servicios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="productos.html">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contactos.html">Contactos</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
-   
+    <!-- HERO -->
+    <section class="hero-activifit">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-8">
+            <div class="new-collection mb-4">NUEVA COLECCIÓN 2026</div>
+            <h1 class="hero-title">Encuentra tu mejor versión</h1>
+            <p class="lead mt-3 mb-4">
+              Descubre la nueva colección deportiva diseñada para entrenar con
+              comodidad y estilo.
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+              <a href="#product-grid" class="btn btn-hero btn-primary"
+                >Comprar Ahora</a
+              >
+              <a href="#product-grid" class="btn btn-hero btn-outline-light"
+                >Ver Colección</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- Toast notification -->
-    <div class="cart-toast" id="toast">🛒 Producto agregado al carrito</div>
+    <!-- Filtros -->
+    <div class="container">
+      <div class="filter-bar">
+        <div class="row g-3">
+          <div class="col-lg-4">
+            <input
+              type="text"
+              id="searchInput"
+              class="form-control"
+              placeholder="🔍 Buscar producto..."
+            />
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <select id="categoryFilter" class="form-select">
+              <option value="all">Todas las categorías</option>
+              <option value="camisetas">Camisetas</option>
+              <option value="sudaderas">Sudaderas</option>
+              <option value="leggings">Leggings</option>
+              <option value="shorts">Shorts</option>
+              <option value="tenis">Tenis</option>
+              <option value="chaquetas">Chaquetas</option>
+            </select>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <select id="genderFilter" class="form-select">
+              <option value="all">Todos</option>
+              <option value="hombre">Hombre</option>
+              <option value="mujer">Mujer</option>
+              <option value="unisex">Unisex</option>
+            </select>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <select id="sizeFilter" class="form-select">
+              <option value="all">Tallas</option>
+              <option value="xs">XS</option>
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+              <option value="xl">XL</option>
+            </select>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <select id="sortFilter" class="form-select">
+              <option value="default">Ordenar por</option>
+              <option value="price-low">Precio: Menor a Mayor</option>
+              <option value="price-high">Precio: Mayor a Menor</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Productos -->
+    <div class="container pb-5" id="product-grid">
+      <div class="row g-4" id="productsContainer"></div>
+    </div>
+
+    <!-- Toast -->
+    <div
+      class="position-fixed bottom-0 end-0 m-4 p-3 rounded-3 shadow text-white"
+      id="toast"
+      style="background: #1e2937; display: none; z-index: 1050"
+    >
+      <i class="bi bi-check-circle-fill me-2"></i>
+      <span id="toastMessage"></span>
+    </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div class="container">
-            <p class="mb-0">&copy; 2026 Mi Sitio Web. Todos los derechos reservados.</p>
-            <small>Desarrollado por Rubiela — HTML, CSS, JavaScript y Bootstrap</small>
-        </div>
+    <footer class="bg-dark text-white text-center py-4">
+      <div class="container">
+        <p class="mb-0">© 2026 ACTIVIFIT. Todos los derechos reservados.</p>
+      </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
+      const products = [
+        {
+          id: 1,
+          name: "Camiseta Running Pro",
+          category: "camisetas",
+          gender: "hombre",
+          size: "m",
+          price: 49.99,
+          oldPrice: 59.99,
+          image: "https://picsum.photos/id/1015/600/600",
+          badge: "nuevo",
+          rating: 5,
+        },
+        {
+          id: 2,
+          name: "Sudadera Performance",
+          category: "sudaderas",
+          gender: "unisex",
+          size: "l",
+          price: 69.99,
+          oldPrice: null,
+          image: "https://picsum.photos/id/201/600/600",
+          badge: null,
+          rating: 4,
+        },
+        {
+          id: 3,
+          name: "Leggings Fit Mujer",
+          category: "leggings",
+          gender: "mujer",
+          size: "s",
+          price: 54.99,
+          oldPrice: 64.99,
+          image: "https://picsum.photos/id/1027/600/600",
+          badge: "oferta",
+          rating: 5,
+        },
+        {
+          id: 4,
+          name: "Shorts Training",
+          category: "shorts",
+          gender: "hombre",
+          size: "m",
+          price: 34.99,
+          oldPrice: null,
+          image: "https://picsum.photos/id/133/600/600",
+          badge: null,
+          rating: 4,
+        },
+        {
+          id: 5,
+          name: "Tenis Sport X",
+          category: "tenis",
+          gender: "unisex",
+          size: "l",
+          price: 119.99,
+          oldPrice: 139.99,
+          image: "https://picsum.photos/id/180/600/600",
+          badge: "nuevo",
+          rating: 5,
+        },
+        {
+          id: 6,
+          name: "Chaqueta Windbreaker",
+          category: "chaquetas",
+          gender: "hombre",
+          size: "xl",
+          price: 89.99,
+          oldPrice: null,
+          image: "https://picsum.photos/id/251/600/600",
+          badge: null,
+          rating: 5,
+        },
+        {
+          id: 7,
+          name: "Camiseta Dry Fit",
+          category: "camisetas",
+          gender: "mujer",
+          size: "m",
+          price: 39.99,
+          oldPrice: null,
+          image: "https://picsum.photos/id/1015/600/600",
+          badge: "oferta",
+          rating: 4,
+        },
+        {
+          id: 8,
+          name: "Pantalón Jogger",
+          category: "sudaderas",
+          gender: "unisex",
+          size: "l",
+          price: 59.99,
+          oldPrice: 69.99,
+          image: "https://picsum.photos/id/201/600/600",
+          badge: null,
+          rating: 5,
+        },
+        {
+          id: 9,
+          name: "Top Deportivo",
+          category: "camisetas",
+          gender: "mujer",
+          size: "s",
+          price: 29.99,
+          oldPrice: null,
+          image: "https://picsum.photos/id/1027/600/600",
+          badge: "nuevo",
+          rating: 5,
+        },
+        {
+          id: 10,
+          name: "Hoodie Sport",
+          category: "sudaderas",
+          gender: "hombre",
+          size: "xl",
+          price: 74.99,
+          oldPrice: null,
+          image: "https://picsum.photos/id/251/600/600",
+          badge: null,
+          rating: 4,
+        },
+        {
+          id: 11,
+          name: "Licra Compresión",
+          category: "leggings",
+          gender: "unisex",
+          size: "m",
+          price: 44.99,
+          oldPrice: 54.99,
+          image: "https://picsum.photos/id/133/600/600",
+          badge: "oferta",
+          rating: 5,
+        },
+        {
+          id: 12,
+          name: "Chaqueta Impermeable",
+          category: "chaquetas",
+          gender: "mujer",
+          size: "l",
+          price: 95.99,
+          oldPrice: null,
+          image: "https://picsum.photos/id/180/600/600",
+          badge: "nuevo",
+          rating: 5,
+        },
+      ];
 
-        // ── Hero animation ──────────────────────────────────────────
-        const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
-        heroTl
-            .to(".hero-badge",    { opacity: 1, y: 0, duration: .6 })
-            .to(".hero-title",    { opacity: 1, y: 0, duration: .7 }, "-=.2")
-            .to(".hero-subtitle", { opacity: 1, y: 0, duration: .6 }, "-=.3")
-            .to(".hero-cta",      { opacity: 1, y: 0, duration: .5 }, "-=.2");
+      function renderProducts(filteredProducts) {
+        const container = document.getElementById("productsContainer");
+        container.innerHTML = "";
 
-        // ── Stats counter ───────────────────────────────────────────
-        gsap.to(".stat-item", {
-            opacity: 1, y: 0, duration: .6, stagger: .15, ease: "power2.out",
-            scrollTrigger: { trigger: ".stats-section", start: "top 80%" }
+        filteredProducts.forEach((product) => {
+          const html = `
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="product-card">
+                            <div class="product-card-img" style="background-image: url('${product.image}')">
+                                ${product.badge ? `<span class="product-badge bg-${product.badge === "oferta" ? "danger" : "success"}">${product.badge.toUpperCase()}</span>` : ""}
+                            </div>
+                            <div class="product-category">${product.category}</div>
+                            <div class="product-info">
+                                <h5 class="product-title">${product.name}</h5>
+                                <p class="product-meta">${product.gender} • Talla ${product.size.toUpperCase()}</p>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <span class="price">$${product.price}</span>
+                                        ${product.oldPrice ? `<span class="price-old ms-2">$${product.oldPrice}</span>` : ""}
+                                    </div>
+                                    <div style="color:#fbbf24;">${"★".repeat(product.rating)}</div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button onclick="addToCart(${product.id})" class="btn btn-agregar flex-fill">
+                                        <i class="bi bi-cart-plus"></i> Agregar
+                                    </button>
+                                    <button class="btn btn-outline-secondary flex-fill">Detalles</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+          container.innerHTML += html;
         });
+      }
 
-        document.querySelectorAll(".stat-number").forEach(el => {
-            const target = +el.dataset.target;
-            ScrollTrigger.create({
-                trigger: el,
-                start: "top 85%",
-                once: true,
-                onEnter: () => {
-                    gsap.to({ val: 0 }, {
-                        val: target, duration: 1.8, ease: "power2.out",
-                        onUpdate: function() { el.textContent = Math.round(this.targets()[0].val).toLocaleString(); }
-                    });
-                }
-            });
-        });
-
-        // ── Filter bar ──────────────────────────────────────────────
-        gsap.to(".filter-bar", {
-            opacity: 1, y: 0, duration: .6, ease: "power2.out",
-            scrollTrigger: { trigger: ".filter-bar", start: "top 88%" }
-        });
-
-        // ── Product cards stagger ───────────────────────────────────
-        gsap.to(".product-card", {
-            opacity: 1, y: 0, duration: .55, stagger: .09, ease: "power2.out",
-            scrollTrigger: { trigger: "#product-grid", start: "top 82%" }
-        });
-
-        // ── Hover pulse on cards ────────────────────────────────────
-        document.querySelectorAll(".product-card").forEach(card => {
-            card.addEventListener("mouseenter", () => {
-                gsap.to(card, { scale: 1.02, duration: .25, ease: "power1.out" });
-            });
-            card.addEventListener("mouseleave", () => {
-                gsap.to(card, { scale: 1, duration: .3, ease: "power1.out" });
-            });
-        });
-
-        // ── Add to cart button ──────────────────────────────────────
+      window.addToCart = function (id) {
         const toast = document.getElementById("toast");
-        document.querySelectorAll(".btn-add").forEach(btn => {
-            btn.addEventListener("click", function() {
-                // Button bounce
-                gsap.timeline()
-                    .to(this, { scale: .92, duration: .1 })
-                    .to(this, { scale: 1, duration: .3, ease: "elastic.out(1,.5)" });
+        document.getElementById("toastMessage").textContent =
+          "Producto agregado al carrito";
+        toast.style.display = "block";
+        setTimeout(() => (toast.style.display = "none"), 2500);
+      };
 
-                // Toast
-                gsap.killTweensOf(toast);
-                gsap.to(toast, { opacity: 1, y: 0, duration: .4, ease: "power2.out" });
-                gsap.to(toast, { opacity: 0, y: 20, duration: .4, delay: 2.2, ease: "power2.in" });
-            });
+      // Filtros
+      function filterProducts() {
+        const search = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const category = document.getElementById("categoryFilter").value;
+        const gender = document.getElementById("genderFilter").value;
+        const size = document.getElementById("sizeFilter").value;
+
+        let filtered = products.filter((p) => {
+          return (
+            p.name.toLowerCase().includes(search) &&
+            (category === "all" || p.category === category) &&
+            (gender === "all" || p.gender === gender) &&
+            (size === "all" || p.size === size)
+          );
         });
 
-        // ── Category filter ─────────────────────────────────────────
-        document.querySelectorAll(".filter-btn").forEach(btn => {
-            btn.addEventListener("click", function() {
-                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-                this.classList.add("active");
-                const cat = this.dataset.cat;
-                const cols = document.querySelectorAll("#product-grid [data-cat]");
+        renderProducts(filtered);
+      }
 
-                cols.forEach(col => {
-                    const match = cat === "all" || col.dataset.cat === cat;
-                    if (match) {
-                        col.style.display = "";
-                        gsap.fromTo(col.querySelector(".product-card"),
-                            { opacity: 0, y: 24, scale: .96 },
-                            { opacity: 1, y: 0, scale: 1, duration: .4, ease: "power2.out" }
-                        );
-                    } else {
-                        gsap.to(col.querySelector(".product-card"), {
-                            opacity: 0, y: -10, duration: .25, ease: "power2.in",
-                            onComplete: () => { col.style.display = "none"; }
-                        });
-                    }
-                });
-            });
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        renderProducts(products);
 
-        // ── Searchbar live filter ───────────────────────────────────
-        document.querySelector(".filter-bar input").addEventListener("input", function() {
-            const q = this.value.toLowerCase();
-            document.querySelectorAll("#product-grid [data-cat]").forEach(col => {
-                const title = col.querySelector(".product-card-title").textContent.toLowerCase();
-                const match = title.includes(q);
-                col.style.display = match ? "" : "none";
-                if (match) {
-                    gsap.fromTo(col.querySelector(".product-card"),
-                        { opacity: 0, y: 16 },
-                        { opacity: 1, y: 0, duration: .35, ease: "power2.out" }
-                    );
-                }
-            });
-        });
-
-        // ── Navbar link hover ripple ────────────────────────────────
-        document.querySelectorAll(".nav-link").forEach(link => {
-            link.addEventListener("mouseenter", () => gsap.to(link, { letterSpacing: ".5px", duration: .2 }));
-            link.addEventListener("mouseleave", () => gsap.to(link, { letterSpacing: "0px", duration: .2 }));
-        });
+        document
+          .getElementById("searchInput")
+          .addEventListener("input", filterProducts);
+        document
+          .getElementById("categoryFilter")
+          .addEventListener("change", filterProducts);
+        document
+          .getElementById("genderFilter")
+          .addEventListener("change", filterProducts);
+        document
+          .getElementById("sizeFilter")
+          .addEventListener("change", filterProducts);
+        document
+          .getElementById("sortFilter")
+          .addEventListener("change", filterProducts);
+      });
     </script>
-</body>
+  </body>
 </html>

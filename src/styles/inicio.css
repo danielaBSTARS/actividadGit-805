@@ -1,0 +1,433 @@
+/* =========================================================
+   ACTIVEFIT — sistema visual "Marca de salida"
+   Inspirado en las líneas de cal de una pista de atletismo,
+   los números de dorsal y el instante justo antes del disparo
+   de salida.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+  --stone:   #F1F2EA;   /* fondo — blanco tiza, línea de pista */
+  --stone-2: #E7E8DD;
+  --ink:     #14201B;   /* texto principal — verde-negro de tartán nocturno */
+  --ink-soft:#42504A;
+  --signal:  #FF4629;   /* acento primario — rojo de línea de meta */
+  --signal-dark:#D6371E;
+  --court:   #0F5132;   /* acento secundario — verde de campo */
+  --line:    rgba(20,32,27,0.12);
+
+  --transition: all .35s cubic-bezier(.4,0,.2,1);
+  --radius: 4px;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  background-color: var(--stone);
+  color: var(--ink);
+  font-family: 'Work Sans', sans-serif;
+}
+
+.eyebrow{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar.bg-dark{
+  background-color: var(--ink) !important;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.navbar-brand strong{
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.4rem;
+}
+
+.navbar-nav .nav-link{
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover{
+  color: var(--signal) !important;
+}
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero-section{
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ink);
+}
+
+.hero-section .hero-media{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-section .hero-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  /* duotono rojo/tinta sobre la fotografía */
+  filter: grayscale(1) contrast(1.15);
+  opacity: 0.55;
+}
+
+.hero-section .hero-media::after{
+  content:'';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(20,32,27,0.97) 15%, rgba(20,32,27,0.55) 48%, rgba(255,70,41,0.35) 100%);
+}
+
+.hero-section .container{
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag{
+  color: var(--signal);
+}
+
+.hero-section h1{
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: 0.5px;
+  max-width: 800px;
+  color: #fff;
+}
+
+.hero-section p{
+  max-width: 560px;
+  color: #D8DDD9;
+}
+
+/* cinta diagonal — el elemento firma de la página */
+.finish-tape{
+  position: absolute;
+  right: -8%;
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  background: repeating-linear-gradient(
+    -35deg,
+    var(--signal) 0 44px,
+    var(--ink) 44px 88px
+  );
+  opacity: 0.9;
+  z-index: 1;
+}
+
+@media (max-width: 992px){
+  .finish-tape{ display:none; }
+}
+
+.btn-primary{
+  background-color: var(--signal);
+  border-color: var(--signal);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  border-radius: var(--radius);
+}
+
+.btn-primary:hover,
+.btn-primary:focus{
+  background-color: var(--signal-dark);
+  border-color: var(--signal-dark);
+}
+
+.btn-outline-light{
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  border-radius: var(--radius);
+  border-width: 2px;
+}
+
+.btn-outline-dark{
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  border-radius: var(--radius);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+}
+
+.btn-outline-dark:hover{
+  background-color: var(--ink);
+  border-color: var(--ink);
+}
+
+/* =========================
+   CATEGORÍAS
+   ========================= */
+
+.categories{
+  background-color: var(--stone);
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.section-tag{
+  color: var(--signal-dark);
+}
+
+.categories h2,
+.benefits-section h2{
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.category-card{
+  height: 100%;
+  border-radius: var(--radius);
+  background-color: #fff;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.category-card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(20,32,27,0.15);
+}
+
+.category-media{
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.category-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+
+.category-card:hover .category-media img{
+  transform: scale(1.06);
+}
+
+.category-media .category-label{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: var(--signal);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  text-transform: uppercase;
+}
+
+.category-body{
+  padding: 1.75rem 1.75rem 2rem;
+}
+
+.category-card h4{
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.category-card p{
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   BENEFICIOS
+   ========================= */
+
+.benefits-section{
+  background-color: var(--ink);
+  color: #fff;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.benefits-section .section-tag{
+  color: var(--signal);
+}
+
+.benefit-card{
+  padding: 2.25rem 1.75rem;
+  height: 100%;
+  background-color: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.benefit-card:hover{
+  background-color: rgba(255,70,41,0.08);
+  border-color: var(--signal);
+  transform: translateY(-5px);
+}
+
+.benefit-icon{
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1.25rem;
+  color: var(--signal);
+}
+
+.benefit-icon svg{
+  width: 100%;
+  height: 100%;
+}
+
+.benefit-card h5{
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.benefit-card p{
+  color: #B7BDB9;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* =========================
+   GALERÍA / PRUEBA SOCIAL
+   ========================= */
+
+.gallery-strip{
+  background-color: var(--stone-2);
+  padding: 3.5rem 0;
+}
+
+.gallery-strip .gallery-media{
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+}
+
+.gallery-strip .gallery-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.gallery-strip .gallery-media:hover img{
+  transform: scale(1.05);
+}
+
+/* =========================
+   CTA
+   ========================= */
+
+.cta-section{
+  background-color: var(--signal);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.cta-section h2{
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+}
+
+.cta-section p{
+  color: rgba(255,255,255,0.9);
+}
+
+.cta-section .btn-dark{
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  border-radius: var(--radius);
+  background-color: var(--ink);
+  border-color: var(--ink);
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer.bg-dark{
+  background-color: var(--ink) !important;
+}
+
+footer h5{
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 1px;
+}
+
+footer small{
+  color: rgba(255,255,255,0.5);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+}
+
+/* =========================
+   RESPONSIVE ACTIVEFIT
+   ========================= */
+
+@media (max-width: 768px){
+
+  .hero-section{
+    min-height: 78vh;
+    text-align: center;
+  }
+
+  .hero-section h1{
+    font-size: 2.4rem;
+  }
+
+  .hero-section p{
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-section .d-flex{
+    justify-content: center;
+  }
+
+  .categories,
+  .benefits-section{
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
