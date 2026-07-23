@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios - Mi Sitio Web</title>
+    <title>Servicios | ACTIVEFIT</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="../src/styles/style.css">
+    <!-- Estilo de la página de inicio -->
+    <link rel="stylesheet" href="../src/styles/inicio.css">
 </head>
 
 <body>
 
-    <!-- Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <strong>Mi Sitio Web</strong>
+                <strong>ACTIVEFIT</strong>
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar menú">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -31,35 +30,237 @@
                         <a class="nav-link" href="../index.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="servicios.html">Servicios</a>
+                        <a class="nav-link active" aria-current="page" href="servicios.html">Servicios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="productos.html">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contactos.html">Contactos</a>
+                        <a class="nav-link" href="contactos.html">Contacto</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
-  
-    <div class="container">
-        <h1>Nuestros Servicios</h1>
-    </div>
+    <main>
+        <section class="hero-section text-white">
+            <div class="hero-media">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1800&q=80" alt="Persona entrenando con ropa deportiva">
+            </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
+            <div class="finish-tape"></div>
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <span class="hero-tag eyebrow">SERVICIOS · ACTIVEFIT</span>
+                        <h1 class="display-3 fw-bold mb-4 mt-3">Tu rutina, mejor acompañada</h1>
+                        <p class="lead mb-4">Descubre asesoría deportiva, planes personalizados, bienestar, personalización de prendas y soluciones para equipos y empresas.</p>
+
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="productos.html" class="btn btn-primary btn-lg px-4">Ver productos</a>
+                            <a href="contactos.html" class="btn btn-outline-light btn-lg px-4">Contáctanos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-tag eyebrow">NUESTROS SERVICIOS</span>
+                    <h2 class="fw-bold mt-2">Todo lo que necesitas para moverte mejor</h2>
+                    <p class="text-muted">Diseñados para deportistas, principiantes y equipos que buscan una experiencia completa.</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <div class="category-media">
+                                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80" alt="Asesoría deportiva">
+                                <span class="category-label">01 · ASESORÍA</span>
+                            </div>
+                            <div class="category-body">
+                                <h4>Asesoría deportiva</h4>
+                                <p>Recomendación de ropa según tu deporte y estilo de entrenamiento.</p>
+                                <ul class="list-unstyled">
+                                    <li>• Gimnasio</li>
+                                    <li>• Running</li>
+                                    <li>• Yoga</li>
+                                    <li>• CrossFit</li>
+                                    <li>• Ciclismo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <div class="category-media">
+                                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80" alt="Planes de entrenamiento">
+                                <span class="category-label">02 · PLANES</span>
+                            </div>
+                            <div class="category-body">
+                                <h4>Planes de entrenamiento</h4>
+                                <p>Rutinas básicas descargables y guías pensadas para principiantes.</p>
+                                <ul class="list-unstyled">
+                                    <li>• Rutinas básicas descargables</li>
+                                    <li>• Guías para principiantes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <div class="category-media">
+                                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80" alt="Blog de bienestar">
+                                <span class="category-label">03 · BIENESTAR</span>
+                            </div>
+                            <div class="category-body">
+                                <h4>Blog de bienestar</h4>
+                                <p>Consejos de ejercicio, nutrición y cuidado de prendas deportivas.</p>
+                                <ul class="list-unstyled">
+                                    <li>• Consejos de ejercicio</li>
+                                    <li>• Nutrición</li>
+                                    <li>• Cuidado de prendas deportivas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <div class="category-media">
+                                <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80" alt="Programa de fidelización">
+                                <span class="category-label">04 · FIDELIDAD</span>
+                            </div>
+                            <div class="category-body">
+                                <h4>Programa de fidelización</h4>
+                                <p>Acumula puntos y accede a descuentos exclusivos para miembros.</p>
+                                <ul class="list-unstyled">
+                                    <li>• Acumulación de puntos</li>
+                                    <li>• Descuentos exclusivos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <div class="category-media">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80" alt="Personalización de prendas">
+                                <span class="category-label">05 · PERSONALIZA</span>
+                            </div>
+                            <div class="category-body">
+                                <h4>Personalización de prendas</h4>
+                                <p>Agrega nombres, iniciales o diseños únicos para tu equipo o grupo.</p>
+                                <ul class="list-unstyled">
+                                    <li>• Nombres e iniciales</li>
+                                    <li>• Diseños personalizados</li>
+                                    <li>• Uniformes para equipos deportivos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="category-card">
+                            <div class="category-media">
+                                <img src="https://images.unsplash.com/photo-1521417531039-2e0fe3b7b4ab?auto=format&fit=crop&w=900&q=80" alt="Empresas y equipos">
+                                <span class="category-label">06 · EQUIPOS</span>
+                            </div>
+                            <div class="category-body">
+                                <h4>Empresas y equipos</h4>
+                                <p>Diseño de uniformes deportivos y ventas al por mayor para tiendas y organizaciones.</p>
+                                <ul class="list-unstyled">
+                                    <li>• Colegios y gimnasios</li>
+                                    <li>• Equipos deportivos</li>
+                                    <li>• Descuentos por volumen</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="benefits-section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <span class="section-tag eyebrow">POR QUÉ ELEGIR ACTIVEFIT</span>
+                    <h2 class="fw-bold mt-2">Una experiencia completa para tu deporte</h2>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                            </div>
+                            <h5>Asesoría real</h5>
+                            <p>Te guiamos para elegir prendas que se adapten a tu disciplina.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M7 11h10"></path><path d="M9 15h6"></path></svg>
+                            </div>
+                            <h5>Planes claros</h5>
+                            <p>Rutinas descargables y guías fáciles de seguir desde el primer día.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"></path></svg>
+                            </div>
+                            <h5>Calidad y confianza</h5>
+                            <p>Prendas funcionales, cómodas y pensadas para rendir.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                            </div>
+                            <h5>Soluciones para todos</h5>
+                            <p>Desde personas individuales hasta equipos y negocios.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container text-center">
+                <h2 class="mb-3">¿Listo para entrenar con estilo?</h2>
+                <p class="mb-4">Haz que cada entrenamiento se sienta más completo con ACTIVEFIT.</p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="productos.html" class="btn btn-dark btn-lg">Ver productos</a>
+                    <a href="contactos.html" class="btn btn-outline-light btn-lg">Contáctanos</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-5">
         <div class="container">
-            <p class="mb-0">&copy; 2026 Mi Sitio Web. Todos los derechos reservados.</p>
-            <small>Desarrollado con HTML, CSS, JavaScript y Bootstrap</small>
+            <div class="row g-4 align-items-center">
+                <div class="col-md-6">
+                    <h5 class="mb-3">ACTIVEFIT</h5>
+                    <p class="mb-0">Ropa deportiva para moverte con estilo, comodidad y confianza.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small>&copy; 2026 ACTIVEFIT. Todos los derechos reservados.</small>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
