@@ -3,24 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactos - Mi Sitio Web</title>
-    <!-- Bootstrap CSS -->
+    <title>Contactos - ActiveFit</title>
+    <!-- Bootstrap (solo grid/utilidades, look propio encima) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../src/styles/style.css">
+    <!-- Tipografías: Anton (display, tono "cartel de gimnasio") + Poppins (cuerpo) + Space Mono (datos/scoreboard) -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ink: #0d0d0d;
+            --concrete: #efede7;
+            --red: #d21f1f;
+            --iron: #4a4a4a;
+            --chalk: #f4c10f;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--ink);
+            background: var(--concrete);
+        }
+
+        .display {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 0.95;
+        }
+
+        .mono {
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* ===== Navegación ===== */
+        .navbar {
+            background: var(--ink) !important;
+            padding: 18px 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+
+        .navbar-nav .nav-link {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.6) !important;
+            padding: 8px 16px !important;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link:hover {
+            color: var(--white) !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--red) !important;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            background: var(--ink);
+            color: var(--white);
+            padding: 90px 0 0;
+            overflow: hidden;
+        }
+
+        .hero .eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--red);
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 9vw, 6.5rem);
+            margin: 10px 0 20px;
+        }
+
+        .hero h1 span {
+            color: var(--red);
+        }
+
+        .hero p.lead-text {
+            max-width: 520px;
+            color: rgba(255,255,255,0.65);
+            font-size: 1.05rem;
+        }
+
+        /* ---- Marcador tipo scoreboard (elemento firma) ---- */
+        .scoreboard {
+            margin-top: 50px;
+            background: #000;
+            border-top: 3px solid var(--red);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .scoreboard .cell {
+            flex: 1 1 220px;
+            padding: 22px 28px;
+            border-right: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .scoreboard .cell:last-child { border-right: none; }
+
+        .scoreboard .cell .label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+        }
+
+        .scoreboard .cell .value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.05rem;
+            color: var(--white);
+            margin-top: 6px;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            margin-right: 8px;
+            background: var(--iron);
+        }
+
+        .status-dot.on {
+            background: #2ecc71;
+            box-shadow: 0 0 8px #2ecc71;
+        }
+
+        .status-dot.off {
+            background: var(--red);
+            box-shadow: 0 0 8px var(--red);
+        }
+
+        /* ===== Sección principal ===== */
+        .section-pad {
+            padding: 90px 0;
+        }
+
+        .eyebrow-sm {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--red);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        h2.section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 10px;
+        }
+
+        /* ---- Formulario ---- */
+        .form-note {
+            color: var(--iron);
+            margin-bottom: 32px;
+        }
+
+        .form-label-custom {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--iron);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-control-custom, .form-select-custom {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #cfcac0;
+            background: transparent;
+            padding: 10px 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            border-radius: 0;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control-custom:focus, .form-select-custom:focus {
+            outline: none;
+            border-bottom-color: var(--red);
+        }
+
+        textarea.form-control-custom {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .btn-scoreboard {
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+            padding: 16px 36px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-scoreboard:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .alert-custom {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            background: #0d0d0d;
+            color: #2ecc71;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            border-left: 3px solid #2ecc71;
+        }
+
+        /* ---- Contacto directo (lista tipo casillero) ---- */
+        .direct-list a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 4px;
+            border-bottom: 1px solid #cfcac0;
+            text-decoration: none;
+            color: var(--ink);
+        }
+
+        .direct-list a:first-child { border-top: 1px solid #cfcac0; }
+
+        .direct-list a:hover {
+            color: var(--red);
+        }
+
+        .direct-list .item-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .direct-list .item-left i {
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        .direct-list .item-left .title {
+            font-weight: 600;
+        }
+
+        .direct-list .item-left small {
+            display: block;
+            color: var(--iron);
+            font-weight: 400;
+        }
+
+        .direct-list a i.bi-arrow-right {
+            transition: transform 0.2s ease;
+        }
+
+        .direct-list a:hover i.bi-arrow-right {
+            transform: translateX(4px);
+        }
+
+        /* ---- Mapa ---- */
+        .map-frame {
+            border: 6px solid var(--ink);
+        }
+
+        .map-frame iframe {
+            width: 100%;
+            height: 320px;
+            border: 0;
+            display: block;
+        }
+
+        /* ===== Redes sociales ===== */
+        .social-band {
+            background: var(--ink);
+            color: var(--white);
+            padding: 70px 0;
+        }
+
+        .social-band .eyebrow-sm { color: var(--chalk); }
+
+        .social-links {
+            border-top: 1px solid rgba(255,255,255,0.15);
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .social-links a .name {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a .handle {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .social-links a:hover .name {
+            color: var(--red);
+        }
+
+        .social-links a .go {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.3);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .social-links a:hover .go {
+            transform: translateX(6px);
+            color: var(--red);
+        }
+
+        /* ===== FAQ ===== */
+        .faq-item {
+            border-bottom: 1px solid #cfcac0;
+        }
+
+        .faq-item:first-child {
+            border-top: 1px solid #cfcac0;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 22px 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            color: var(--ink);
+        }
+
+        .faq-question .toggle-icon {
+            font-size: 1.4rem;
+            color: var(--red);
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+            margin-left: 20px;
+        }
+
+        .faq-question[aria-expanded="true"] .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 4px 22px;
+            color: var(--iron);
+            max-width: 640px;
+        }
+
+        /* ===== Botón flotante WhatsApp ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 26px;
+            right: 26px;
+            width: 58px;
+            height: 58px;
+            background: var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            background: #a91717;
+            color: #fff;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: var(--ink);
+            color: rgba(255,255,255,0.5);
+            padding: 28px 0;
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        @media (max-width: 767px) {
+            .scoreboard .cell { flex: 1 1 50%; }
+        }
+    </style>
 </head>
 <body>
     <!-- Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <strong>Mi Sitio Web</strong>
+                <strong>ACTIVEFIT</strong>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Mostrar menú">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -33,40 +462,266 @@
                         <a class="nav-link" href="productos.html">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="contactos.html">Contactos</a>
+                        <a class="nav-link active" aria-current="page" href="contactos.html">Contacto</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
-  
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <span class="eyebrow">// Estamos para ayudarte</span>
+            <h1 class="display">Hablemos<br><span>de tu entreno.</span></h1>
+            <p class="lead-text">Dudas sobre equipos, membresías o servicios: escríbenos por el canal que prefieras y te respondemos rápido.</p>
+        </div>
+
+        <!-- Elemento firma: marcador tipo scoreboard con estado en vivo -->
+        <div class="scoreboard">
+            <div class="cell">
+                <div class="label">Estado</div>
+                <div class="value" id="statusValue"><span class="status-dot" id="statusDot"></span><span id="statusText">Calculando...</span></div>
+            </div>
+            <div class="cell">
+                <div class="label">Dirección</div>
+                <div class="value">Cra. 45 #23-10, Medellín</div>
+            </div>
+            <div class="cell">
+                <div class="label">Teléfono</div>
+                <div class="value">+57 300 123 4567</div>
+            </div>
+            <div class="cell">
+                <div class="label">Correo</div>
+                <div class="value">contacto@activefit.com</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario + contacto directo -->
+    <section class="section-pad">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <span class="eyebrow-sm">Formulario</span>
+                    <h2 class="display section-title">Escríbenos</h2>
+                    <p class="form-note">Cuéntanos qué necesitas y un asesor te contacta el mismo día.</p>
+
+                    <div class="alert-custom d-none" id="successAlert">✓ Mensaje enviado. Te contactaremos pronto.</div>
+
+                    <form id="contactForm" novalidate>
+                        <div class="row g-4">
+                            <div class="col-sm-6">
+                                <label class="form-label-custom" for="nombre">Nombre completo</label>
+                                <input type="text" class="form-control-custom" id="nombre" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label-custom" for="email">Correo electrónico</label>
+                                <input type="email" class="form-control-custom" id="email" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label-custom" for="telefono">Teléfono (opcional)</label>
+                                <input type="tel" class="form-control-custom" id="telefono" placeholder="300 123 4567">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label-custom" for="asunto">Asunto</label>
+                                <select class="form-select-custom" id="asunto" required>
+                                    <option value="" selected disabled>Selecciona un motivo</option>
+                                    <option value="productos">Productos</option>
+                                    <option value="servicios">Servicios</option>
+                                    <option value="membresias">Membresías y planes</option>
+                                    <option value="soporte">Soporte / postventa</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label-custom" for="mensaje">Mensaje</label>
+                                <textarea class="form-control-custom" id="mensaje" required></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-scoreboard mt-4">Enviar mensaje →</button>
+                    </form>
+                </div>
+
+                <div class="col-lg-6">
+                    <span class="eyebrow-sm">Canales directos</span>
+                    <h2 class="display section-title">Contacto rápido</h2>
+
+                    <div class="direct-list mb-5">
+                        <a href="https://wa.me/573001234567" target="_blank">
+                            <span class="item-left">
+                                <i class="bi bi-whatsapp"></i>
+                                <span><span class="title">WhatsApp</span><small>Respuesta en minutos</small></span>
+                            </span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                        <a href="tel:+573001234567">
+                            <span class="item-left">
+                                <i class="bi bi-telephone-fill"></i>
+                                <span><span class="title">Llamada</span><small>Lunes a sábado</small></span>
+                            </span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                        <a href="mailto:contacto@activefit.com">
+                            <span class="item-left">
+                                <i class="bi bi-envelope-fill"></i>
+                                <span><span class="title">Correo</span><small>Respuesta en 24h</small></span>
+                            </span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <span class="eyebrow-sm">Ubicación</span>
+                    <div class="map-frame mb-4">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15866.470!2d-75.5636!3d6.2442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTQnMzkuMSJOIDc1wrAzMyc0OS4wIlc!5e0!3m2!1ses!2sco!4v0000000"
+                            allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+                    <p class="mono" style="font-size:0.85rem; color:var(--iron);">
+                        LUN–VIE 5:00–22:00 · SÁB 6:00–20:00 · DOM/FEST 8:00–14:00
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Redes sociales -->
+    <section class="social-band">
+        <div class="container">
+            <span class="eyebrow-sm">Comunidad</span>
+            <h2 class="display section-title" style="color:#fff;">Síguenos</h2>
+            <p style="color:rgba(255,255,255,0.5); max-width:480px;">Rutinas, tips de entrenamiento y promociones antes que nadie.</p>
+
+            <div class="social-links">
+                <a href="#" target="_blank">
+                    <span><span class="name">Instagram</span><br><span class="handle">@activefit.co</span></span>
+                    <i class="bi bi-arrow-right go"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <span><span class="name">Facebook</span><br><span class="handle">/activefitmedellin</span></span>
+                    <i class="bi bi-arrow-right go"></i>
+                </a>
+                <a href="https://wa.me/573001234567" target="_blank">
+                    <span><span class="name">WhatsApp</span><br><span class="handle">+57 300 123 4567</span></span>
+                    <i class="bi bi-arrow-right go"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <span><span class="name">TikTok</span><br><span class="handle">@activefit.co</span></span>
+                    <i class="bi bi-arrow-right go"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <span><span class="name">YouTube</span><br><span class="handle">ActiveFit</span></span>
+                    <i class="bi bi-arrow-right go"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-pad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <span class="eyebrow-sm">Antes de escribir</span>
+                    <h2 class="display section-title mb-4">Preguntas frecuentes</h2>
+
+                    <div id="faqList">
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                ¿Hacen envíos a domicilio?
+                                <span class="toggle-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Sí, enviamos a todo Medellín y su área metropolitana en 24–48 horas hábiles. También puedes recoger tu pedido en tienda.</div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                ¿Puedo agendar una asesoría personalizada?
+                                <span class="toggle-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Claro. Escríbenos por WhatsApp o marca "Asesoría" en el formulario y coordinamos un horario contigo.</div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                ¿Cuánto tardan en responder?
+                                <span class="toggle-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Por WhatsApp, minutos en horario de atención. Por correo o formulario, máximo 24 horas hábiles.</div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false">
+                                ¿Tienen planes corporativos?
+                                <span class="toggle-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Sí, para empresas y grupos. Cuéntanos el tamaño de tu equipo en el formulario y te enviamos una cotización.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.me/573001234567" target="_blank" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div class="container">
-            <p class="mb-0">&copy; 2026 Mi Sitio Web. Todos los derechos reservados.</p>
-            <small>Desarrollado con HTML, CSS, JavaScript y Bootstrap</small>
-        </div>
+    <footer>
+        © 2026 ACTIVEFIT — TODOS LOS DERECHOS RESERVADOS
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="../src/scripts/script.js"></script>
-
     <script>
+        // Estado en vivo (abierto/cerrado) según horario real
+        (function () {
+            const now = new Date();
+            const day = now.getDay(); // 0 dom - 6 sáb
+            const hour = now.getHours() + now.getMinutes() / 60;
+            let open = false;
+
+            if (day >= 1 && day <= 5) open = hour >= 5 && hour < 22;
+            else if (day === 6) open = hour >= 6 && hour < 20;
+            else open = hour >= 8 && hour < 14;
+
+            const dot = document.getElementById('statusDot');
+            const text = document.getElementById('statusText');
+            if (open) {
+                dot.classList.add('on');
+                text.textContent = 'Abierto ahora';
+            } else {
+                dot.classList.add('off');
+                text.textContent = 'Cerrado ahora';
+            }
+        })();
+
+        // Acordeón FAQ simple
+        document.querySelectorAll('.faq-question').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                const answer = btn.nextElementSibling;
+                btn.setAttribute('aria-expanded', String(!expanded));
+                answer.style.maxHeight = expanded ? '0px' : answer.scrollHeight + 'px';
+            });
+        });
+
+        // Validación y envío del formulario
         const form = document.getElementById('contactForm');
         form.addEventListener('submit', function (e) {
             e.preventDefault();
             if (!form.checkValidity()) {
-                e.stopPropagation();
-                form.classList.add('was-validated');
+                form.reportValidity();
                 return;
             }
             form.reset();
-            form.classList.remove('was-validated');
             document.getElementById('successAlert').classList.remove('d-none');
         });
     </script>
