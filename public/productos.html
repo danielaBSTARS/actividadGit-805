@@ -1,299 +1,153 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos | ActiveFit</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-    <link rel="stylesheet" href="../src/styles/inicio.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../src/styles/inicio.css">
 
     <style>
-      .product-grid {
-        background: #f8fafc;
-      }
-      .product-card {
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-        transition: all 0.3s ease;
-        height: 100%;
-      }
-      .product-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-      }
-      .product-img {
-        height: 240px;
-        background-size: cover;
-        background-position: center;
-      }
-      .product-badge {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        padding: 5px 14px;
-        border-radius: 30px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: white;
-      }
-      .badge-nuevo {
-        background: #10b981;
-      }
-      .badge-oferta {
-        background: #eab308;
-        color: #1f2937;
-      }
+        :root {
+            --primary: #2563eb;
+        }
+        .product-grid { background: #f8fafc; }
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+        .product-img {
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+        }
+        .product-badge {
+            position: absolute;
+            top: 12px; left: 12px;
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        .badge-nuevo { background: #10b981; }
+        .badge-oferta { background: #eab308; color: #1f2937; }
 
-      .product-category {
-        font-size: 0.78rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: #64748b;
-      }
-      .product-name {
-        font-weight: 700;
-        margin: 6px 0 4px;
-        font-size: 1.1rem;
-      }
-      .product-price {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #1e40af;
-      }
-      .price-old {
-        text-decoration: line-through;
-        color: #94a3b8;
-      }
-      .btn-cart {
-        background: #ef4444;
-        color: white;
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-      }
+        .product-category {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+        .product-name {
+            font-weight: 700;
+            margin: 6px 0 4px;
+            font-size: 1.1rem;
+        }
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e40af;
+        }
+        .price-old {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+        .btn-cart {
+            background: #ef4444;
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-      <div class="container">
-        <a class="navbar-brand" href="../index.html"
-          ><strong>ACTIVEFIT</strong></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="../index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="servicios.html">Servicios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="productos.html">Productos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contactos.html">Contacto</a>
-            </li>
-          </ul>
+        <div class="container">
+            <a class="navbar-brand" href="../index.html"><strong>ACTIVEFIT</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="productos.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contactos.html">Contacto</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
     <!-- Hero -->
-    <section
-      class="py-5 text-center text-white"
-      style="
-        background:
-          linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)),
-          url(&quot;https://picsum.photos/id/1015/2000/1200&quot;) center/cover;
-      "
-    >
-      <div class="container py-5">
-        <span class="badge bg-white text-dark px-4 py-2 mb-3"
-          >NUEVA COLECCIÓN 2026</span
-        >
-        <h1 class="display-3 fw-bold">Encuentra tu mejor versión</h1>
-        <p class="lead">
-          Descubre la nueva colección deportiva diseñada para entrenar con
-          comodidad y estilo.
-        </p>
-      </div>
+    <section class="py-5 text-center text-white" 
+             style="background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.8)), url('https://picsum.photos/id/1015/2000/1200') center/cover;">
+        <div class="container py-5">
+            <span class="badge bg-white text-dark px-4 py-2 mb-3">NUEVA COLECCIÓN 2026</span>
+            <h1 class="display-3 fw-bold">Encuentra tu mejor versión</h1>
+            <p class="lead">Descubre la nueva colección deportiva diseñada para entrenar con comodidad y estilo.</p>
+        </div>
     </section>
 
     <!-- Productos -->
     <div class="product-grid py-5">
-      <div class="container">
-        <div class="row g-4" id="productsContainer"></div>
-      </div>
+        <div class="container">
+            <div class="row g-4" id="productsContainer"></div>
+        </div>
     </div>
 
     <!-- Toast -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      <div id="toast" class="toast bg-success text-white" role="alert">
-        <div class="toast-body">✅ Producto agregado al carrito</div>
-      </div>
+        <div id="toast" class="toast bg-success text-white" role="alert">
+            <div class="toast-body">✅ Producto agregado al carrito</div>
+        </div>
     </div>
 
     <footer class="bg-dark text-white text-center py-4">
-      <div class="container">
-        <h5>ACTIVEFIT</h5>
-        <p>&copy; 2026 ActiveFit. Todos los derechos reservados.</p>
-      </div>
+        <div class="container">
+            <h5>ACTIVEFIT</h5>
+            <p>&copy; 2026 ActiveFit. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      const products = [
-        {
-          id: 1,
-          name: "Tenis Sport X",
-          category: "TENIS",
-          gender: "unisex",
-          size: "42",
-          price: 119.99,
-          oldPrice: 139.99,
-          image:
-            "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: "Nuevo",
-        },
-        {
-          id: 2,
-          name: "Chaqueta Windbreaker",
-          category: "CHAQUETAS",
-          gender: "hombre",
-          size: "L",
-          price: 89.99,
-          oldPrice: null,
-          image:
-            "https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: null,
-        },
-        {
-          id: 3,
-          name: "Camiseta Dry Fit",
-          category: "CAMISETAS",
-          gender: "mujer",
-          size: "M",
-          price: 39.99,
-          oldPrice: null,
-          image:
-            "https://images.pexels.com/photos/6311659/pexels-photo-6311659.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: null,
-        },
-        {
-          id: 4,
-          name: "Pantalón Jogger",
-          category: "SUDADERAS",
-          gender: "unisex",
-          size: "L",
-          price: 59.99,
-          oldPrice: 69.99,
-          image:
-            "https://images.pexels.com/photos/6311398/pexels-photo-6311398.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: null,
-        },
-        {
-          id: 5,
-          name: "Top Deportivo",
-          category: "CAMISETAS",
-          gender: "mujer",
-          size: "S",
-          price: 29.99,
-          oldPrice: null,
-          image:
-            "https://images.pexels.com/photos/3764011/pexels-photo-3764011.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: "Nuevo",
-        },
-        {
-          id: 6,
-          name: "Hoodie Sport",
-          category: "SUDADERAS",
-          gender: "hombre",
-          size: "L",
-          price: 74.99,
-          oldPrice: null,
-          image:
-            "https://images.pexels.com/photos/9558761/pexels-photo-9558761.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: null,
-        },
-        {
-          id: 7,
-          name: "Licra Compresión",
-          category: "LEGGINGS",
-          gender: "unisex",
-          size: "M",
-          price: 44.99,
-          oldPrice: 54.99,
-          image:
-            "https://images.pexels.com/photos/6456157/pexels-photo-6456157.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: "Oferta",
-        },
-        {
-          id: 8,
-          name: "Chaqueta Impermeable",
-          category: "CHAQUETAS",
-          gender: "mujer",
-          size: "L",
-          price: 95.99,
-          oldPrice: null,
-          image:
-            "https://images.pexels.com/photos/6311608/pexels-photo-6311608.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: "Nuevo",
-        },
-        {
-          id: 9,
-          name: "Camiseta Running Pro",
-          category: "CAMISETAS",
-          gender: "hombre",
-          size: "M",
-          price: 49.99,
-          oldPrice: 59.99,
-          image:
-            "https://images.pexels.com/photos/6456306/pexels-photo-6456306.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: null,
-        },
-        {
-          id: 10,
-          name: "Shorts Training",
-          category: "SHORTS",
-          gender: "hombre",
-          size: "M",
-          price: 34.99,
-          oldPrice: null,
-          image:
-            "https://images.pexels.com/photos/6311387/pexels-photo-6311387.jpeg?auto=compress&cs=tinysrgb&w=800",
-          badge: null,
-        },
-      ];
+        const products = [
+            {id:1, name:"Tenis Sport X", category:"TENIS", gender:"unisex", size:"42", price:119.99, oldPrice:139.99, image:"https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800", badge:"Nuevo"},
+            {id:2, name:"Chaqueta Windbreaker", category:"CHAQUETAS", gender:"hombre", size:"L", price:89.99, oldPrice:null, image:"https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=800", badge:null},
+            {id:3, name:"Camiseta Dry Fit", category:"CAMISETAS", gender:"mujer", size:"M", price:39.99, oldPrice:null, image:"https://images.pexels.com/photos/6311659/pexels-photo-6311659.jpeg?auto=compress&cs=tinysrgb&w=800", badge:null},
+            {id:4, name:"Pantalón Jogger", category:"SUDADERAS", gender:"unisex", size:"L", price:59.99, oldPrice:69.99, image:"https://images.pexels.com/photos/6311398/pexels-photo-6311398.jpeg?auto=compress&cs=tinysrgb&w=800", badge:null},
+            {id:5, name:"Top Deportivo", category:"CAMISETAS", gender:"mujer", size:"S", price:29.99, oldPrice:null, image:"https://images.pexels.com/photos/3764011/pexels-photo-3764011.jpeg?auto=compress&cs=tinysrgb&w=800", badge:"Nuevo"},
+            {id:6, name:"Hoodie Sport", category:"SUDADERAS", gender:"hombre", size:"L", price:74.99, oldPrice:null, image:"https://images.pexels.com/photos/9558761/pexels-photo-9558761.jpeg?auto=compress&cs=tinysrgb&w=800", badge:null},
+            {id:7, name:"Licra Compresión", category:"LEGGINGS", gender:"unisex", size:"M", price:44.99, oldPrice:54.99, image:"https://images.pexels.com/photos/6456157/pexels-photo-6456157.jpeg?auto=compress&cs=tinysrgb&w=800", badge:"Oferta"},
+            {id:8, name:"Chaqueta Impermeable", category:"CHAQUETAS", gender:"mujer", size:"L", price:95.99, oldPrice:null, image:"https://images.pexels.com/photos/6311608/pexels-photo-6311608.jpeg?auto=compress&cs=tinysrgb&w=800", badge:"Nuevo"},
+            {id:9, name:"Camiseta Running Pro", category:"CAMISETAS", gender:"hombre", size:"M", price:49.99, oldPrice:59.99, image:"https://images.pexels.com/photos/6456306/pexels-photo-6456306.jpeg?auto=compress&cs=tinysrgb&w=800", badge:null},
+            {id:10, name:"Shorts Training", category:"SHORTS", gender:"hombre", size:"M", price:34.99, oldPrice:null, image:"https://images.pexels.com/photos/6311387/pexels-photo-6311387.jpeg?auto=compress&cs=tinysrgb&w=800", badge:null}
+        ];
 
-      function renderProducts(filtered) {
-        const container = document.getElementById("productsContainer");
-        container.innerHTML = "";
+        function renderProducts(filtered) {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = '';
 
-        filtered.forEach((p) => {
-          const html = `
+            filtered.forEach(p => {
+                const html = `
                     <div class="col-lg-3 col-md-6 col-12">
                         <div class="product-card position-relative">
                             <div class="product-img" style="background-image: url('${p.image}')"></div>
-                            ${p.badge ? `<span class="product-badge ${p.badge === "Oferta" ? "badge-oferta" : "badge-nuevo"}">${p.badge}</span>` : ""}
+                            ${p.badge ? `<span class="product-badge ${p.badge === 'Oferta' ? 'badge-oferta' : 'badge-nuevo'}">${p.badge}</span>` : ''}
                             <div class="p-3">
                                 <div class="product-category">${p.category} • ${p.gender}</div>
                                 <div class="product-name">${p.name}</div>
@@ -301,7 +155,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <span class="product-price">$${p.price}</span>
-                                        ${p.oldPrice ? `<span class="price-old ms-1">$${p.oldPrice}</span>` : ""}
+                                        ${p.oldPrice ? `<span class="price-old ms-1">$${p.oldPrice}</span>` : ''}
                                     </div>
                                     <button onclick="addToCart(${p.id})" class="btn btn-cart">
                                         <i class="bi bi-cart-plus"></i>
@@ -311,18 +165,18 @@
                         </div>
                     </div>
                 `;
-          container.innerHTML += html;
+                container.innerHTML += html;
+            });
+        }
+
+        window.addToCart = function(id) {
+            const toast = new bootstrap.Toast(document.getElementById('toast'));
+            toast.show();
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
         });
-      }
-
-      window.addToCart = function (id) {
-        const toast = new bootstrap.Toast(document.getElementById("toast"));
-        toast.show();
-      };
-
-      document.addEventListener("DOMContentLoaded", () => {
-        renderProducts(products);
-      });
     </script>
-  </body>
+</body>
 </html>
